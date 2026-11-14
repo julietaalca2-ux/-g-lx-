@@ -225,4 +225,3 @@ export function initSettings() {
     // Asegurar vista principal al iniciar
     showSettingsSubview("main");
 }
-
