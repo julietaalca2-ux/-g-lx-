@@ -2,6 +2,7 @@
 import { initSettings, showSettingsSubview } from "./settings.js?v=1";
 import { initProfile, updateSavedPosts, loadProfilePosts } from "./profile.js?v=1";
 import { initFeed, syncFeedWithProfile } from "./feed.js?v=1";
+import { initChat, showChatList } from "./chat.js?v=1";
 
 function initApp() {
 
@@ -41,6 +42,10 @@ function initApp() {
 
         if (name === "home") {
             syncFeedWithProfile();
+        }
+
+        if (name === "chat") {
+            showChatList();
         }
 
         if (name === "settings") {
@@ -101,6 +106,8 @@ function initApp() {
     initProfile();
 
     initFeed();
+
+    initChat();
 
     showSection("home");
 }
