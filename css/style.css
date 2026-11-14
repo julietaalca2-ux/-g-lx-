@@ -224,6 +224,10 @@ textarea:focus {
 
 /* PUBLICACIONES DEL FEED */
 
+.posts {
+    width: 100%;
+}
+
 .post {
     width: 100%;
     margin-bottom: 22px;
@@ -248,10 +252,6 @@ textarea:focus {
     justify-content: center;
     font-weight: 700;
     flex-shrink: 0;
-}
-
-.avatar-two {
-    background: #777;
 }
 
 .user-info {
@@ -288,27 +288,6 @@ textarea:focus {
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.image-one {
-    background: linear-gradient(145deg, #f1f1f1, #cfcfcf);
-}
-
-.image-one span {
-    font-size: 70px;
-    font-weight: 900;
-    letter-spacing: -5px;
-    color: #fff;
-}
-
-.image-two {
-    background: linear-gradient(145deg, #d9d9d9, #929292);
-}
-
-.image-two span {
-    font-size: 28px;
-    font-weight: 600;
-    color: #fff;
 }
 
 /* ACCIONES DE PUBLICACIONES */
@@ -364,6 +343,35 @@ textarea:focus {
     color: var(--secondary);
     font-size: 11px;
     padding: 2px 0;
+}
+
+/* ESTADOS VACÍOS GENERALES */
+
+.empty-state {
+    min-height: 50vh;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.empty-state[hidden] {
+    display: none !important;
+}
+
+.empty-state h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.empty-state p {
+    max-width: 270px;
+    color: var(--secondary);
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 /* 2. CHAT */
@@ -442,7 +450,8 @@ textarea:focus {
     text-overflow: ellipsis;
 }
 
-.chat-thread-view[hidden] {
+.chat-thread-view[hidden],
+#chatListView[hidden] {
     display: none !important;
 }
 
@@ -741,6 +750,11 @@ textarea:focus {
     line-height: 1.5;
 }
 
+.profile-description:empty,
+.profile-description p:empty {
+    display: none;
+}
+
 /* PESTAÑAS INTERNAS DEL PERFIL */
 
 .profile-tabs {
@@ -829,11 +843,6 @@ textarea:focus {
     width: 100%;
     height: 100%;
     aspect-ratio: auto;
-}
-
-.profile-post-tile .post-image span {
-    font-size: 30px;
-    letter-spacing: -2px;
 }
 
 /* ESTADOS VACÍOS DEL PERFIL */
@@ -1000,7 +1009,7 @@ textarea:focus {
     font-size: 12px !important;
 }
 
-/* MODAL INFERIOR (COMENTARIOS / HISTORIAS / NOTIFICACIONES) */
+/* MODAL INFERIOR (COMENTARIOS / NOTIFICACIONES / OPCIONES) */
 
 .sheet-backdrop[hidden] {
     display: none !important;
