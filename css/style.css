@@ -155,42 +155,7 @@ button {
     font-size: 14px;
 }
 
-/* CREAR PUBLICACIÓN */
-
-#camera-section {
-    background: #fff;
-}
-
-.create-content {
-    min-height: 48vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 12px;
-}
-
-.create-icon {
-    width: 75px;
-    height: 75px;
-    border: 2px solid #111;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 45px;
-    font-weight: 300;
-}
-
-.create-content h3 {
-    font-size: 19px;
-}
-
-.create-content p {
-    color: var(--secondary);
-    font-size: 13px;
-}
+/* BOTONES GLOBALES */
 
 .primary-button {
     width: 100%;
