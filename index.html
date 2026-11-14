@@ -9,7 +9,7 @@
 
     <title>ÖG</title>
 
-    <link rel="stylesheet" href="css/style.css?v=7">
+    <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 
@@ -46,29 +46,9 @@
             <section class="stories-section">
                 <div class="stories" id="stories">
 
-                    <button class="story" type="button" data-story-user="Tu historia" data-story-text="Crea una publicación para compartir un momento con tus seguidores.">
+                    <button class="story" type="button" id="ownStoryBtn">
                         <div class="story-avatar own-story"><span>+</span></div>
                         <span>Tu historia</span>
-                    </button>
-
-                    <button class="story" type="button" data-story-user="sofia" data-story-text="Probando la nueva interfaz minimalista de ÖG.">
-                        <div class="story-avatar"><span>S</span></div>
-                        <span>sofia</span>
-                    </button>
-
-                    <button class="story" type="button" data-story-user="mateo" data-story-text="Un nuevo día para compartir ideas.">
-                        <div class="story-avatar"><span>M</span></div>
-                        <span>mateo</span>
-                    </button>
-
-                    <button class="story" type="button" data-story-user="lucia" data-story-text="Diseño limpio, sin distracciones.">
-                        <div class="story-avatar"><span>L</span></div>
-                        <span>lucia</span>
-                    </button>
-
-                    <button class="story" type="button" data-story-user="juan" data-story-text="Conectado desde iPhone.">
-                        <div class="story-avatar"><span>J</span></div>
-                        <span>juan</span>
                     </button>
 
                 </div>
@@ -76,122 +56,17 @@
 
 
             <!-- PUBLICACIONES DEL FEED -->
-            <section class="posts" id="feedPosts">
+            <section class="posts" id="feedPosts"></section>
 
-                <article class="post" id="post-1" data-post-id="post-1" data-username="usuario_og">
+            <!-- ESTADO VACÍO DEL FEED -->
+            <div class="empty-state feed-empty" id="feedEmpty">
+                <h3>Todavía no hay publicaciones</h3>
+                <p>Cuando publiques algo o sigas a otros usuarios, aparecerá aquí.</p>
+                <button class="primary-button" type="button" data-section-link="camera">
+                    Crear primera publicación
+                </button>
+            </div>
 
-                    <div class="post-header">
-                        <div class="user-avatar">O</div>
-
-                        <div class="user-info">
-                            <strong class="post-author-name">usuario_og</strong>
-                            <span>Hace 10 minutos</span>
-                        </div>
-
-                        <button class="more-button" type="button" aria-label="Más opciones">•••</button>
-                    </div>
-
-                    <div class="post-image image-one">
-                        <span>ÖG</span>
-                    </div>
-
-                    <div class="post-actions">
-                        <div class="post-actions-left">
-
-                            <button class="action-button like-button" type="button" aria-label="Me gusta">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>
-                                </svg>
-                            </button>
-
-                            <button class="action-button comment-button" type="button" aria-label="Comentar">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8Z"/>
-                                </svg>
-                            </button>
-
-                            <button class="action-button share-button" type="button" aria-label="Compartir">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="m22 2-7 20-4-9-9-4Z"/>
-                                    <path d="M22 2 11 13"/>
-                                </svg>
-                            </button>
-
-                        </div>
-
-                        <button class="action-button save-button" type="button" aria-label="Guardar">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <div class="post-description">
-                        <strong class="likes-count">128 Me gusta</strong>
-                        <p><strong class="post-caption-user">usuario_og</strong> <span class="post-caption-text">Así comienza algo nuevo.</span></p>
-                        <button class="view-comments-btn" type="button">Ver los 2 comentarios</button>
-                    </div>
-
-                </article>
-
-
-                <article class="post" id="post-2" data-post-id="post-2" data-username="mateo">
-
-                    <div class="post-header">
-                        <div class="user-avatar avatar-two">M</div>
-
-                        <div class="user-info">
-                            <strong class="post-author-name">mateo</strong>
-                            <span>Hace 1 hora</span>
-                        </div>
-
-                        <button class="more-button" type="button" aria-label="Más opciones">•••</button>
-                    </div>
-
-                    <div class="post-image image-two">
-                        <span>Un nuevo día.</span>
-                    </div>
-
-                    <div class="post-actions">
-                        <div class="post-actions-left">
-
-                            <button class="action-button like-button" type="button" aria-label="Me gusta">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>
-                                </svg>
-                            </button>
-
-                            <button class="action-button comment-button" type="button" aria-label="Comentar">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8Z"/>
-                                </svg>
-                            </button>
-
-                            <button class="action-button share-button" type="button" aria-label="Compartir">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="m22 2-7 20-4-9-9-4Z"/>
-                                    <path d="M22 2 11 13"/>
-                                </svg>
-                            </button>
-
-                        </div>
-
-                        <button class="action-button save-button" type="button" aria-label="Guardar">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <div class="post-description">
-                        <strong class="likes-count">64 Me gusta</strong>
-                        <p><strong class="post-caption-user">mateo</strong> <span class="post-caption-text">Un nuevo día para compartir.</span></p>
-                        <button class="view-comments-btn" type="button">Ver 1 comentario</button>
-                    </div>
-
-                </article>
-
-            </section>
         </section>
 
 
@@ -205,6 +80,11 @@
                 </div>
 
                 <div class="chat-list" id="chatList"></div>
+
+                <div class="empty-state" id="chatEmptyState">
+                    <h3>Todavía no hay conversaciones</h3>
+                    <p>Tus mensajes directos aparecerán aquí cuando inicies un chat.</p>
+                </div>
             </div>
 
             <!-- VISTA CONVERSACIÓN INDIVIDUAL -->
@@ -213,10 +93,10 @@
                     <button class="back-button" id="chatBackBtn" type="button" aria-label="Volver a conversaciones">
                         ‹
                     </button>
-                    <div class="chat-thread-avatar" id="chatThreadAvatar">S</div>
+                    <div class="chat-thread-avatar" id="chatThreadAvatar"></div>
                     <div class="chat-thread-user">
-                        <strong id="chatThreadName">sofia</strong>
-                        <span>En línea</span>
+                        <strong id="chatThreadName"></strong>
+                        <span id="chatThreadStatus">Disponible</span>
                     </div>
                 </div>
 
@@ -307,32 +187,32 @@
             </div>
 
             <div class="profile-header">
-                <div class="profile-avatar" id="profileAvatarInitial">Ö</div>
-                <h2 id="profileDisplayName">usuario_og</h2>
-                <p id="profileHandle">@usuario_og</p>
+                <div class="profile-avatar" id="profileAvatarInitial">U</div>
+                <h2 id="profileDisplayName">usuario</h2>
+                <p id="profileHandle">@usuario</p>
             </div>
 
             <div class="profile-stats">
 
                 <div>
-                    <strong id="profilePostCount">1</strong>
+                    <strong id="profilePostCount">0</strong>
                     <span>Publicaciones</span>
                 </div>
 
                 <div>
-                    <strong id="profileFollowersCount">24</strong>
+                    <strong id="profileFollowersCount">0</strong>
                     <span>Seguidores</span>
                 </div>
 
                 <div>
-                    <strong id="profileFollowingCount">18</strong>
+                    <strong id="profileFollowingCount">0</strong>
                     <span>Seguidos</span>
                 </div>
 
             </div>
 
             <div class="profile-description">
-                <p id="profileBioText">Bienvenido a mi perfil de ÖG.</p>
+                <p id="profileBioText"></p>
             </div>
 
 
@@ -399,7 +279,7 @@
                 <div class="profile-empty">
                     <div class="profile-empty-icon">▶</div>
                     <h3>Todavía no hay Reels</h3>
-                    <p>Los videos cortos requieren almacenamiento multimedia en servidor para publicarse y reproducirse.</p>
+                    <p>Los videos cortos aparecerán aquí cuando exista contenido publicado.</p>
                 </div>
 
             </div>
@@ -469,10 +349,10 @@
 
                 <form class="settings-form" id="editProfileForm">
                     <label class="field-label" for="editNameInput">Nombre de usuario</label>
-                    <input type="text" id="editNameInput" value="usuario_og" maxlength="30" required>
+                    <input type="text" id="editNameInput" value="usuario" maxlength="30" required>
 
                     <label class="field-label" for="editBioInput">Biografía</label>
-                    <textarea id="editBioInput" rows="3" maxlength="150">Bienvenido a mi perfil de ÖG.</textarea>
+                    <textarea id="editBioInput" rows="3" maxlength="150" placeholder="Escribe una breve biografía..."></textarea>
 
                     <button type="submit" class="primary-button full-width-btn">Guardar cambios</button>
                 </form>
@@ -554,12 +434,12 @@
                 </div>
 
                 <div class="settings-info-card">
-                    <h3>Sesión actual</h3>
-                    <p>Estás navegando en modo local sobre navegador móvil/escritorio. Para autenticación real con contraseña y sesiones protegidas se requiere conectar un proveedor de identidad en servidor.</p>
+                    <h3>Estado de la sesión</h3>
+                    <p>Aplicación limpia sin datos de prueba. Conecta Supabase Auth y Database para habilitar inicio de sesión y persistencia en la nube.</p>
                 </div>
 
                 <button type="button" class="secondary-button full-width-btn" id="resetAppBtn">
-                    Restablecer datos de esta sesión
+                    Limpiar sesión actual
                 </button>
             </div>
 
@@ -571,9 +451,9 @@
                 </div>
 
                 <div class="settings-info-card">
-                    <h3>ÖG Web App</h3>
-                    <p>Aplicación social minimalista desarrollada en HTML, CSS y JavaScript puro, optimizada para Safari en iPhone y despliegue en Vercel.</p>
-                    <p class="settings-meta">Versión 1.0 · Interfaz independiente por secciones</p>
+                    <h3>ÖG</h3>
+                    <p>Aplicación social minimalista desarrollada en HTML, CSS y JavaScript puro, preparada para integración con Supabase y despliegue en Vercel.</p>
+                    <p class="settings-meta">Versión 1.0</p>
                 </div>
             </div>
 
@@ -582,7 +462,7 @@
     </main>
 
 
-    <!-- MODAL DE COMENTARIOS / HISTORIAS / NOTIFICACIONES -->
+    <!-- MODAL INFERIOR (COMENTARIOS / NOTIFICACIONES / OPCIONES) -->
     <div class="sheet-backdrop" id="sheetBackdrop" hidden>
         <div class="sheet-modal" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
             <div class="sheet-header">
@@ -653,7 +533,7 @@
 
 </div>
 
-<script src="js/app.js?v=7"></script>
+<script src="js/app.js?v=8"></script>
 
 </body>
 </html>
