@@ -136,12 +136,6 @@ button {
     font-weight: 750;
 }
 
-/* CHAT */
-
-#chat-section {
-    background: #fff;
-}
-
 .empty-state {
     min-height: 50vh;
     display: flex;
