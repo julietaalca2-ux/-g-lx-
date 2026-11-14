@@ -42,24 +42,26 @@ function initApp() {
         });
 
         if (name === "home") {
-            syncFeedWithProfile();
+            try { syncFeedWithProfile(); } catch (e) {}
         }
 
         if (name === "chat") {
-            showChatList();
+            try { showChatList(); } catch (e) {}
         }
 
         if (name === "camera") {
-            resetCreateForm();
+            try { resetCreateForm(); } catch (e) {}
         }
 
         if (name === "settings") {
-            showSettingsSubview("main");
+            try { showSettingsSubview("main"); } catch (e) {}
         }
 
         if (name === "profile") {
-            loadProfilePosts();
-            updateSavedPosts();
+            try {
+                loadProfilePosts();
+                updateSavedPosts();
+            } catch (e) {}
         }
 
         window.scrollTo({
@@ -103,22 +105,21 @@ function initApp() {
 
 
     // =====================================
-    // INICIALIZACIÓN
+    // INICIALIZACIÓN SEGURA
     // =====================================
 
-    initSettings();
-
-    initProfile();
-
-    initFeed();
-
-    initChat();
-
-    initCreate({
-        onPublished: function () {
-            showSection("home");
-        }
-    });
+    try { initSettings(); } catch (e) { console.error("Error en settings:", e); }
+    try { initProfile(); } catch (e) { console.error("Error en profile:", e); }
+    try { initFeed(); } catch (e) { console.error("Error en feed:", e); }
+    try { initChat(); } catch (e) { console.error("Error en chat:", e); }
+    
+    try {
+        initCreate({
+            onPublished: function () {
+                showSection("home");
+            }
+        });
+    } catch (e) { console.error("Error en create:", e); }
 
     showSection("home");
 }
