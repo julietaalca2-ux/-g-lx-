@@ -1,125 +1,221 @@
-// Lógica modular de la sección Perfil (ÖG)
+/* =====================================
+   PERFIL (ÖG)
+===================================== */
 
-export function showProfileTab(name) {
-    const target = document.getElementById("profile-" + name);
-
-    if (!target) {
-        console.error("No existe la pestaña del perfil: " + name);
-        return;
-    }
-
-    const profileTabs = document.querySelectorAll(".profile-tab");
-    const profilePanels = document.querySelectorAll(".profile-tab-panel");
-
-    profileTabs.forEach(function (tab) {
-        const selected = tab.dataset.profileTab === name;
-        tab.classList.toggle("active", selected);
-        tab.setAttribute("aria-selected", selected ? "true" : "false");
-    });
-
-    profilePanels.forEach(function (panel) {
-        const isTarget = panel === target;
-        panel.classList.toggle("active", isTarget);
-        panel.hidden = !isTarget;
-    });
+#profile-section {
+    background: var(--bg);
 }
 
-export function updateSavedPosts() {
-    const savedPostsContainer = document.getElementById("savedPosts");
-    const savedEmpty = document.getElementById("savedEmpty");
-
-    if (!savedPostsContainer || !savedEmpty) return;
-
-    savedPostsContainer.innerHTML = "";
-
-    const savedButtons = document.querySelectorAll(
-        "#feedPosts .save-button.saved"
-    );
-
-    savedButtons.forEach(function (button) {
-        const originalPost = button.closest(".post");
-
-        if (!originalPost) return;
-
-        const copy = originalPost.cloneNode(true);
-
-        // Evitar IDs duplicados.
-        copy.removeAttribute("id");
-
-        copy.classList.add("saved-post-copy");
-
-        // Las copias son solo una vista de los guardados.
-        savedPostsContainer.appendChild(copy);
-    });
-
-    const hasSavedPosts = savedButtons.length > 0;
-
-    savedEmpty.style.display = hasSavedPosts ? "none" : "flex";
-    savedPostsContainer.style.display = hasSavedPosts ? "flex" : "none";
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+    gap: 7px;
 }
 
-export function loadProfilePosts() {
-    const profilePostsContainer = document.getElementById("profilePosts");
-    const profilePublicationsEmpty = document.getElementById("profilePublicationsEmpty");
-
-    if (!profilePostsContainer) return;
-
-    profilePostsContainer.innerHTML = "";
-
-    const usernameEl = document.querySelector("#profile-section .profile-header p");
-    const activeUsername = usernameEl
-        ? usernameEl.textContent.trim().replace(/^@+/, "")
-        : "usuario_og";
-
-    const ownPosts = document.querySelectorAll(
-        `#feedPosts .post[data-username="${activeUsername || "usuario_og"}"]`
-    );
-
-    ownPosts.forEach(function (post) {
-        const image = post.querySelector(".post-image");
-
-        if (!image) return;
-
-        const tile = document.createElement("div");
-
-        tile.className = "profile-post-tile";
-
-        tile.appendChild(image.cloneNode(true));
-
-        profilePostsContainer.appendChild(tile);
-    });
-
-    const hasPosts = profilePostsContainer.children.length > 0;
-
-    if (profilePublicationsEmpty) {
-        profilePublicationsEmpty.style.display = hasPosts ? "none" : "flex";
-    }
-
-    const count = document.getElementById("profilePostCount");
-
-    if (count) {
-        count.textContent = ownPosts.length;
-    }
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 8px;
+    border-radius: 50%;
+    background: #111111;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 700;
 }
 
-export function initProfile() {
-    const profileTabs = document.querySelectorAll(".profile-tab");
-
-    profileTabs.forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            const name = button.dataset.profileTab;
-
-            if (name) {
-                showProfileTab(name);
-            }
-        });
-    });
-
-    loadProfilePosts();
-    updateSavedPosts();
-    showProfileTab("publications");
+.profile-header h2 {
+    font-size: 20px;
 }
 
+.profile-header p {
+    color: var(--secondary);
+    font-size: 13px;
+}
+
+/* ESTADÍSTICAS */
+
+.profile-stats {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.profile-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.profile-stats strong {
+    font-size: 18px;
+}
+
+.profile-stats span {
+    color: var(--secondary);
+    font-size: 11px;
+}
+
+/* BIOGRAFÍA */
+
+.profile-description {
+    padding: 18px 5px;
+    font-size: 13px;
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+/* PESTAÑAS INTERNAS DEL PERFIL */
+
+.profile-tabs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 5px;
+}
+
+.profile-tab {
+    min-width: 0;
+    min-height: 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #999999;
+    position: relative;
+}
+
+.profile-tab svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.profile-tab span {
+    font-size: 10px;
+}
+
+.profile-tab.active {
+    color: #111111;
+}
+
+.profile-tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 18%;
+    width: 64%;
+    height: 2px;
+    background: #111111;
+}
+
+/* PANELES INTERNOS */
+
+.profile-tab-panel {
+    display: none;
+    width: 100%;
+    min-height: 220px;
+}
+
+.profile-tab-panel[hidden] {
+    display: none !important;
+}
+
+.profile-tab-panel.active {
+    display: block;
+}
+
+/* CUADRÍCULA DE PUBLICACIONES DEL PERFIL */
+
+.profile-post-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+}
+
+.profile-post-tile {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--soft);
+}
+
+.profile-post-tile .post-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+}
+
+/* ESTADOS VACÍOS DEL PERFIL */
+
+.profile-empty {
+    width: 100%;
+    min-height: 220px;
+    padding: 35px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 9px;
+}
+
+.profile-empty h3 {
+    font-size: 16px;
+}
+
+.profile-empty p {
+    max-width: 250px;
+    color: var(--secondary);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.profile-empty-icon {
+    width: 55px;
+    height: 55px;
+    border: 1.5px solid #222222;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+/* GUARDADOS */
+
+.saved-posts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+
+.saved-post-copy {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.saved-post-copy .post-actions {
+    display: none;
+}
