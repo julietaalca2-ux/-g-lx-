@@ -9,6 +9,7 @@
     <title>ÖG</title>
 
     <link rel="stylesheet" href="css/style.css?v=9">
+    <link rel="stylesheet" href="css/settings.css?v=1">
 </head>
 <body>
 
@@ -213,36 +214,259 @@
         <!-- CONFIGURACIÓN -->
         <section class="app-section tab-panel" id="settings-section" hidden>
 
-            <div class="tab-header">
-                <h2>Configuración</h2>
+            <!-- MENÚ PRINCIPAL DE CONFIGURACIÓN -->
+            <div class="settings-view" data-settings-view="main">
+
+                <div class="tab-header">
+                    <h2>Configuración</h2>
+                </div>
+
+                <div class="settings-list">
+
+                    <button class="settings-option" type="button" data-settings-target="edit-profile">
+                        <span>Editar perfil</span>
+                        <span>›</span>
+                    </button>
+
+                    <button class="settings-option" type="button" data-settings-target="privacy">
+                        <span>Privacidad</span>
+                        <span>›</span>
+                    </button>
+
+                    <button class="settings-option" type="button" data-settings-target="notifications">
+                        <span>Notificaciones</span>
+                        <span>›</span>
+                    </button>
+
+                    <button class="settings-option" type="button" data-settings-target="security">
+                        <span>Seguridad</span>
+                        <span>›</span>
+                    </button>
+
+                    <button class="settings-option" type="button" data-settings-target="about">
+                        <span>Acerca de ÖG</span>
+                        <span>›</span>
+                    </button>
+
+                </div>
+
             </div>
 
-            <div class="settings-list">
 
-                <button class="settings-option" type="button">
-                    <span>Editar perfil</span>
-                    <span>›</span>
-                </button>
+            <!-- SUBVISTA: EDITAR PERFIL -->
+            <div class="settings-subview" data-settings-subview="edit-profile" hidden>
 
-                <button class="settings-option" type="button">
-                    <span>Privacidad</span>
-                    <span>›</span>
-                </button>
+                <div class="settings-subview-header">
+                    <button class="settings-back-button" type="button" data-settings-back aria-label="Volver">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <h3>Editar perfil</h3>
+                </div>
 
-                <button class="settings-option" type="button">
-                    <span>Notificaciones</span>
-                    <span>›</span>
-                </button>
+                <form class="settings-form" id="settingsEditProfileForm" novalidate>
 
-                <button class="settings-option" type="button">
-                    <span>Seguridad</span>
-                    <span>›</span>
-                </button>
+                    <div class="settings-field">
+                        <label for="settingsNameInput">Nombre</label>
+                        <input
+                            class="settings-input"
+                            id="settingsNameInput"
+                            name="name"
+                            type="text"
+                            maxlength="30"
+                            autocomplete="name"
+                            placeholder="Tu nombre">
+                    </div>
 
-                <button class="settings-option" type="button">
-                    <span>Acerca de ÖG</span>
-                    <span>›</span>
-                </button>
+                    <div class="settings-field">
+                        <label for="settingsUsernameInput">Nombre de usuario</label>
+                        <input
+                            class="settings-input"
+                            id="settingsUsernameInput"
+                            name="username"
+                            type="text"
+                            maxlength="24"
+                            autocapitalize="none"
+                            autocorrect="off"
+                            spellcheck="false"
+                            placeholder="usuario_og">
+                    </div>
+
+                    <div class="settings-field">
+                        <label for="settingsBioInput">Presentación</label>
+                        <textarea
+                            class="settings-textarea"
+                            id="settingsBioInput"
+                            name="bio"
+                            maxlength="140"
+                            placeholder="Contá algo sobre vos..."></textarea>
+                    </div>
+
+                    <button class="primary-button settings-save-button" type="submit">
+                        Guardar cambios
+                    </button>
+
+                    <p class="settings-feedback" id="settingsProfileFeedback" aria-live="polite"></p>
+
+                </form>
+
+            </div>
+
+
+            <!-- SUBVISTA: PRIVACIDAD -->
+            <div class="settings-subview" data-settings-subview="privacy" hidden>
+
+                <div class="settings-subview-header">
+                    <button class="settings-back-button" type="button" data-settings-back aria-label="Volver">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <h3>Privacidad</h3>
+                </div>
+
+                <div class="settings-group">
+
+                    <div class="settings-toggle-row">
+                        <div class="settings-toggle-info">
+                            <strong>Cuenta privada</strong>
+                            <span>Solo los seguidores que apruebes podrán ver tus publicaciones.</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" data-setting-toggle="privateAccount">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-toggle-row">
+                        <div class="settings-toggle-info">
+                            <strong>Estado de actividad</strong>
+                            <span>Permitir que las cuentas que seguís vean cuando estás activo.</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" data-setting-toggle="showActivity">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUBVISTA: NOTIFICACIONES -->
+            <div class="settings-subview" data-settings-subview="notifications" hidden>
+
+                <div class="settings-subview-header">
+                    <button class="settings-back-button" type="button" data-settings-back aria-label="Volver">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <h3>Notificaciones</h3>
+                </div>
+
+                <div class="settings-group">
+
+                    <div class="settings-toggle-row">
+                        <div class="settings-toggle-info">
+                            <strong>Me gusta y comentarios</strong>
+                            <span>Recibir avisos cuando alguien interactúe con tus publicaciones.</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" data-setting-toggle="pushLikes">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-toggle-row">
+                        <div class="settings-toggle-info">
+                            <strong>Mensajes directos</strong>
+                            <span>Mostrar alertas cuando recibas un mensaje nuevo en Chat.</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" data-setting-toggle="pushMessages">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUBVISTA: SEGURIDAD -->
+            <div class="settings-subview" data-settings-subview="security" hidden>
+
+                <div class="settings-subview-header">
+                    <button class="settings-back-button" type="button" data-settings-back aria-label="Volver">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <h3>Seguridad</h3>
+                </div>
+
+                <div class="settings-group">
+
+                    <div class="settings-toggle-row">
+                        <div class="settings-toggle-info">
+                            <strong>Autenticación en dos pasos</strong>
+                            <span>Agregá una capa adicional de protección al iniciar sesión.</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" data-setting-toggle="twoFactor">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-toggle-row">
+                        <div class="settings-toggle-info">
+                            <strong>Alertas de inicio de sesión</strong>
+                            <span>Avisar si se detecta un acceso desde un dispositivo nuevo.</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" data-setting-toggle="loginAlerts">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUBVISTA: ACERCA DE ÖG -->
+            <div class="settings-subview" data-settings-subview="about" hidden>
+
+                <div class="settings-subview-header">
+                    <button class="settings-back-button" type="button" data-settings-back aria-label="Volver">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <h3>Acerca de ÖG</h3>
+                </div>
+
+                <div class="settings-about-card">
+                    <div class="settings-about-logo">ÖG</div>
+                    <span class="settings-about-version">Versión 1.0 • Edición Web Móvil</span>
+                    <p class="settings-about-text">
+                        Una experiencia social minimalista, rápida y enfocada en compartir momentos sin distracciones.
+                    </p>
+                </div>
+
+                <div class="settings-info-list">
+                    <div class="settings-info-item">
+                        <span>Plataforma</span>
+                        <span>Web App (iOS / Android)</span>
+                    </div>
+                    <div class="settings-info-item">
+                        <span>Almacenamiento</span>
+                        <span>Local en dispositivo</span>
+                    </div>
+                </div>
 
             </div>
 
@@ -295,7 +519,7 @@
 
 </div>
 
-<script src="js/app.js?v=9"></script>
+<script type="module" src="js/app.js?v=10"></script>
 
 </body>
 </html>
