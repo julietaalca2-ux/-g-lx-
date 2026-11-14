@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <title>ÖG</title>
 
-    <link rel="stylesheet" href="css/style.css?v=8">
+    <link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body>
 
@@ -17,10 +16,10 @@
 
     <!-- ENCABEZADO -->
     <header class="topbar">
-        <h1 class="logo" id="logoHomeBtn">ÖG</h1>
+        <h1 class="logo">ÖG</h1>
 
         <div class="top-actions">
-            <button class="icon-button" id="notificationsBtn" aria-label="Notificaciones" type="button">
+            <button class="icon-button" aria-label="Me gusta" type="button">
                 <svg viewBox="0 0 24 24">
                     <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>
                 </svg>
@@ -39,147 +38,57 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="feed">
 
-        <!-- 1. INICIO -->
+        <!-- INICIO -->
         <section class="app-section active" id="home-section">
 
             <!-- HISTORIAS -->
             <section class="stories-section">
-                <div class="stories" id="stories">
-
-                    <button class="story" type="button" id="ownStoryBtn">
-                        <div class="story-avatar own-story"><span>+</span></div>
-                        <span>Tu historia</span>
-                    </button>
-
-                </div>
+                <div class="stories" id="stories"></div>
             </section>
 
 
             <!-- PUBLICACIONES DEL FEED -->
             <section class="posts" id="feedPosts"></section>
 
-            <!-- ESTADO VACÍO DEL FEED -->
-            <div class="empty-state feed-empty" id="feedEmpty">
-                <h3>Todavía no hay publicaciones</h3>
-                <p>Cuando publiques algo o sigas a otros usuarios, aparecerá aquí.</p>
-                <button class="primary-button" type="button" data-section-link="camera">
-                    Crear primera publicación
-                </button>
-            </div>
-
         </section>
 
 
-        <!-- 2. CHAT -->
+        <!-- CHAT -->
         <section class="app-section tab-panel" id="chat-section" hidden>
 
-            <!-- VISTA LISTA DE CONVERSACIONES -->
-            <div id="chatListView">
-                <div class="tab-header">
-                    <h2>Chat</h2>
-                </div>
-
-                <div class="chat-list" id="chatList"></div>
-
-                <div class="empty-state" id="chatEmptyState">
-                    <h3>Todavía no hay conversaciones</h3>
-                    <p>Tus mensajes directos aparecerán aquí cuando inicies un chat.</p>
-                </div>
+            <div class="tab-header">
+                <h2>Chat</h2>
             </div>
 
-            <!-- VISTA CONVERSACIÓN INDIVIDUAL -->
-            <div id="chatThreadView" class="chat-thread-view" hidden>
-                <div class="chat-thread-header">
-                    <button class="back-button" id="chatBackBtn" type="button" aria-label="Volver a conversaciones">
-                        ‹
-                    </button>
-                    <div class="chat-thread-avatar" id="chatThreadAvatar"></div>
-                    <div class="chat-thread-user">
-                        <strong id="chatThreadName"></strong>
-                        <span id="chatThreadStatus">Disponible</span>
-                    </div>
-                </div>
-
-                <div class="chat-messages" id="chatMessages"></div>
-
-                <form class="chat-input-bar" id="chatForm">
-                    <input
-                        type="text"
-                        id="chatMessageInput"
-                        placeholder="Escribe un mensaje..."
-                        autocomplete="off"
-                        required
-                    >
-                    <button type="submit" class="chat-send-btn">Enviar</button>
-                </form>
+            <div class="empty-state">
+                <h3>Tus mensajes</h3>
+                <p>Aquí aparecerán tus conversaciones.</p>
             </div>
 
         </section>
 
 
-        <!-- 3. CREAR -->
+        <!-- CREAR -->
         <section class="app-section tab-panel" id="camera-section" hidden>
 
             <div class="tab-header">
                 <h2>Crear publicación</h2>
             </div>
 
-            <form class="create-form" id="createPostForm">
+            <div class="create-content">
+                <div class="create-icon">+</div>
+                <h3>Compartí un momento</h3>
+                <p>Seleccioná una fotografía para comenzar.</p>
 
-                <input
-                    type="file"
-                    id="postPhotoInput"
-                    accept="image/*"
-                    class="visually-hidden"
-                >
-
-                <!-- SELECTOR INICIAL -->
-                <div class="create-content" id="createPickerBox">
-                    <div class="create-icon">+</div>
-                    <h3>Compartí un momento</h3>
-                    <p>Seleccioná una fotografía desde tu dispositivo para comenzar.</p>
-
-                    <button class="primary-button" id="selectPhotoBtn" type="button">
-                        Seleccionar fotografía
-                    </button>
-                </div>
-
-                <!-- VISTA PREVIA DE FOTOGRAFÍA -->
-                <div class="create-preview-box" id="createPreviewBox" hidden>
-                    <div class="create-preview-frame">
-                        <img id="createPreviewImg" src="" alt="Vista previa de la publicación">
-                    </div>
-
-                    <div class="create-preview-actions">
-                        <button type="button" class="secondary-button" id="changePhotoBtn">
-                            Cambiar fotografía
-                        </button>
-                        <button type="button" class="secondary-button" id="removePhotoBtn">
-                            Quitar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- DESCRIPCIÓN Y BOTÓN PUBLICAR -->
-                <div class="create-fields">
-                    <label for="postCaptionInput" class="field-label">Descripción</label>
-                    <textarea
-                        id="postCaptionInput"
-                        rows="3"
-                        placeholder="Escribe una descripción para tu publicación..."
-                    ></textarea>
-
-                    <button class="primary-button full-width-btn" id="publishPostBtn" type="submit">
-                        Publicar
-                    </button>
-                </div>
-
-            </form>
+                <button class="primary-button" type="button">
+                    Seleccionar fotografía
+                </button>
+            </div>
 
         </section>
 
 
-        <!-- 4. PERFIL -->
+        <!-- PERFIL -->
         <section class="app-section tab-panel" id="profile-section" hidden>
 
             <div class="tab-header">
@@ -187,9 +96,9 @@
             </div>
 
             <div class="profile-header">
-                <div class="profile-avatar" id="profileAvatarInitial">U</div>
-                <h2 id="profileDisplayName">usuario</h2>
-                <p id="profileHandle">@usuario</p>
+                <div class="profile-avatar">Ö</div>
+                <h2>usuario_og</h2>
+                <p>@usuario_og</p>
             </div>
 
             <div class="profile-stats">
@@ -200,19 +109,19 @@
                 </div>
 
                 <div>
-                    <strong id="profileFollowersCount">0</strong>
+                    <strong>0</strong>
                     <span>Seguidores</span>
                 </div>
 
                 <div>
-                    <strong id="profileFollowingCount">0</strong>
+                    <strong>0</strong>
                     <span>Seguidos</span>
                 </div>
 
             </div>
 
             <div class="profile-description">
-                <p id="profileBioText"></p>
+                <p>Bienvenido a mi perfil de ÖG.</p>
             </div>
 
 
@@ -279,7 +188,7 @@
                 <div class="profile-empty">
                     <div class="profile-empty-icon">▶</div>
                     <h3>Todavía no hay Reels</h3>
-                    <p>Los videos cortos aparecerán aquí cuando exista contenido publicado.</p>
+                    <p>Los videos que publiques aparecerán aquí.</p>
                 </div>
 
             </div>
@@ -293,7 +202,7 @@
                 <div class="profile-empty" id="savedEmpty">
                     <div class="profile-empty-icon">▢</div>
                     <h3>No hay publicaciones guardadas</h3>
-                    <p>Las publicaciones que guardes en el Inicio aparecerán aquí.</p>
+                    <p>Las publicaciones que guardes aparecerán aquí.</p>
                 </div>
 
             </div>
@@ -301,160 +210,40 @@
         </section>
 
 
-        <!-- 5. AJUSTES -->
+        <!-- CONFIGURACIÓN -->
         <section class="app-section tab-panel" id="settings-section" hidden>
 
-            <!-- MENÚ PRINCIPAL DE AJUSTES -->
-            <div id="settingsMenuView">
-                <div class="tab-header">
-                    <h2>Configuración</h2>
-                </div>
-
-                <div class="settings-list">
-
-                    <button class="settings-option" type="button" data-settings-view="edit-profile">
-                        <span>Editar perfil</span>
-                        <span>›</span>
-                    </button>
-
-                    <button class="settings-option" type="button" data-settings-view="privacy">
-                        <span>Privacidad</span>
-                        <span>›</span>
-                    </button>
-
-                    <button class="settings-option" type="button" data-settings-view="notifications">
-                        <span>Notificaciones</span>
-                        <span>›</span>
-                    </button>
-
-                    <button class="settings-option" type="button" data-settings-view="security">
-                        <span>Seguridad</span>
-                        <span>›</span>
-                    </button>
-
-                    <button class="settings-option" type="button" data-settings-view="about">
-                        <span>Acerca de ÖG</span>
-                        <span>›</span>
-                    </button>
-
-                </div>
+            <div class="tab-header">
+                <h2>Configuración</h2>
             </div>
 
-            <!-- SUBPANTALLA: EDITAR PERFIL -->
-            <div class="settings-subview" id="settings-edit-profile" hidden>
-                <div class="subview-header">
-                    <button type="button" class="back-button settings-back-btn">‹</button>
-                    <h2>Editar perfil</h2>
-                </div>
+            <div class="settings-list">
 
-                <form class="settings-form" id="editProfileForm">
-                    <label class="field-label" for="editNameInput">Nombre de usuario</label>
-                    <input type="text" id="editNameInput" value="usuario" maxlength="30" required>
-
-                    <label class="field-label" for="editBioInput">Biografía</label>
-                    <textarea id="editBioInput" rows="3" maxlength="150" placeholder="Escribe una breve biografía..."></textarea>
-
-                    <button type="submit" class="primary-button full-width-btn">Guardar cambios</button>
-                </form>
-            </div>
-
-            <!-- SUBPANTALLA: PRIVACIDAD -->
-            <div class="settings-subview" id="settings-privacy" hidden>
-                <div class="subview-header">
-                    <button type="button" class="back-button settings-back-btn">‹</button>
-                    <h2>Privacidad</h2>
-                </div>
-
-                <div class="settings-toggle-list">
-                    <label class="settings-toggle-row">
-                        <div>
-                            <strong>Cuenta privada</strong>
-                            <span>Solo tus seguidores aprobados ven tus publicaciones.</span>
-                        </div>
-                        <input type="checkbox" id="togglePrivateAccount">
-                    </label>
-
-                    <label class="settings-toggle-row">
-                        <div>
-                            <strong>Estado de actividad</strong>
-                            <span>Mostrar cuando estás en línea en el Chat.</span>
-                        </div>
-                        <input type="checkbox" id="toggleActivityStatus" checked>
-                    </label>
-
-                    <label class="settings-toggle-row">
-                        <div>
-                            <strong>Permitir comentarios</strong>
-                            <span>Cualquier usuario puede comentar tus publicaciones.</span>
-                        </div>
-                        <input type="checkbox" id="toggleAllowComments" checked>
-                    </label>
-                </div>
-            </div>
-
-            <!-- SUBPANTALLA: NOTIFICACIONES -->
-            <div class="settings-subview" id="settings-notifications" hidden>
-                <div class="subview-header">
-                    <button type="button" class="back-button settings-back-btn">‹</button>
-                    <h2>Notificaciones</h2>
-                </div>
-
-                <div class="settings-toggle-list">
-                    <label class="settings-toggle-row">
-                        <div>
-                            <strong>Me gusta</strong>
-                            <span>Avisar cuando alguien indique Me gusta.</span>
-                        </div>
-                        <input type="checkbox" id="toggleNotifLikes" checked>
-                    </label>
-
-                    <label class="settings-toggle-row">
-                        <div>
-                            <strong>Comentarios</strong>
-                            <span>Avisar cuando comenten tus publicaciones.</span>
-                        </div>
-                        <input type="checkbox" id="toggleNotifComments" checked>
-                    </label>
-
-                    <label class="settings-toggle-row">
-                        <div>
-                            <strong>Mensajes directos</strong>
-                            <span>Avisar al recibir nuevos mensajes en Chat.</span>
-                        </div>
-                        <input type="checkbox" id="toggleNotifMessages" checked>
-                    </label>
-                </div>
-            </div>
-
-            <!-- SUBPANTALLA: SEGURIDAD -->
-            <div class="settings-subview" id="settings-security" hidden>
-                <div class="subview-header">
-                    <button type="button" class="back-button settings-back-btn">‹</button>
-                    <h2>Seguridad</h2>
-                </div>
-
-                <div class="settings-info-card">
-                    <h3>Estado de la sesión</h3>
-                    <p>Aplicación limpia sin datos de prueba. Conecta Supabase Auth y Database para habilitar inicio de sesión y persistencia en la nube.</p>
-                </div>
-
-                <button type="button" class="secondary-button full-width-btn" id="resetAppBtn">
-                    Limpiar sesión actual
+                <button class="settings-option" type="button">
+                    <span>Editar perfil</span>
+                    <span>›</span>
                 </button>
-            </div>
 
-            <!-- SUBPANTALLA: ACERCA DE ÖG -->
-            <div class="settings-subview" id="settings-about" hidden>
-                <div class="subview-header">
-                    <button type="button" class="back-button settings-back-btn">‹</button>
-                    <h2>Acerca de ÖG</h2>
-                </div>
+                <button class="settings-option" type="button">
+                    <span>Privacidad</span>
+                    <span>›</span>
+                </button>
 
-                <div class="settings-info-card">
-                    <h3>ÖG</h3>
-                    <p>Aplicación social minimalista desarrollada en HTML, CSS y JavaScript puro, preparada para integración con Supabase y despliegue en Vercel.</p>
-                    <p class="settings-meta">Versión 1.0</p>
-                </div>
+                <button class="settings-option" type="button">
+                    <span>Notificaciones</span>
+                    <span>›</span>
+                </button>
+
+                <button class="settings-option" type="button">
+                    <span>Seguridad</span>
+                    <span>›</span>
+                </button>
+
+                <button class="settings-option" type="button">
+                    <span>Acerca de ÖG</span>
+                    <span>›</span>
+                </button>
+
             </div>
 
         </section>
@@ -462,35 +251,8 @@
     </main>
 
 
-    <!-- MODAL INFERIOR (COMENTARIOS / NOTIFICACIONES / OPCIONES) -->
-    <div class="sheet-backdrop" id="sheetBackdrop" hidden>
-        <div class="sheet-modal" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-            <div class="sheet-header">
-                <h3 id="sheetTitle">Comentarios</h3>
-                <button type="button" class="sheet-close-btn" id="sheetCloseBtn" aria-label="Cerrar">✕</button>
-            </div>
-
-            <div class="sheet-body" id="sheetBody"></div>
-
-            <form class="sheet-comment-form" id="sheetCommentForm" hidden>
-                <input
-                    type="text"
-                    id="sheetCommentInput"
-                    placeholder="Agrega un comentario..."
-                    autocomplete="off"
-                    required
-                >
-                <button type="submit">Publicar</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- AVISO FLOTANTE (TOAST) -->
-    <div class="toast" id="appToast" role="status" aria-live="polite"></div>
-
-
     <!-- NAVEGACIÓN INFERIOR -->
-    <nav class="bottom-nav" aria-label="Navegación principal">
+    <nav class="bottom-nav">
 
         <button class="nav-item active" type="button" data-section="home" aria-label="Inicio">
             <svg viewBox="0 0 24 24">
@@ -533,7 +295,7 @@
 
 </div>
 
-<script src="js/app.js?v=8"></script>
+<script src="js/app.js?v=9"></script>
 
 </body>
 </html>
