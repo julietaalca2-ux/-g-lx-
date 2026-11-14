@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/style.css?v=11">
     <link rel="stylesheet" href="css/feed.css?v=1">
     <link rel="stylesheet" href="css/chat.css?v=1">
+    <link rel="stylesheet" href="css/create.css?v=1">
     <link rel="stylesheet" href="css/profile.css?v=1">
     <link rel="stylesheet" href="css/settings.css?v=1">
 </head>
@@ -126,14 +127,53 @@
                 <h2>Crear publicación</h2>
             </div>
 
-            <div class="create-content">
+            <input
+                type="file"
+                id="createFileInput"
+                accept="image/*"
+                hidden>
+
+            <!-- ESTADO INICIAL DE SELECCIÓN -->
+            <div class="create-content" id="createEmptyView">
                 <div class="create-icon">+</div>
                 <h3>Compartí un momento</h3>
                 <p>Seleccioná una fotografía para comenzar.</p>
 
-                <button class="primary-button" type="button">
+                <button class="primary-button" id="createSelectButton" type="button">
                     Seleccionar fotografía
                 </button>
+            </div>
+
+            <!-- EDITOR DE PUBLICACIÓN -->
+            <div class="create-editor" id="createEditorView" hidden>
+
+                <div class="create-preview-box">
+                    <img class="create-preview-image" id="createPreviewImage" alt="Vista previa">
+                    <button class="create-change-button" id="createChangeButton" type="button">
+                        Cambiar foto
+                    </button>
+                </div>
+
+                <div class="create-field">
+                    <label for="createCaptionInput">Descripción</label>
+                    <textarea
+                        class="create-caption-input"
+                        id="createCaptionInput"
+                        maxlength="220"
+                        placeholder="Escribí una leyenda..."></textarea>
+                </div>
+
+                <p class="create-feedback" id="createFeedback" aria-live="polite"></p>
+
+                <div class="create-actions">
+                    <button class="primary-button create-publish-button" id="createPublishButton" type="button">
+                        Compartir
+                    </button>
+                    <button class="create-cancel-button" id="createCancelButton" type="button">
+                        Cancelar
+                    </button>
+                </div>
+
             </div>
 
         </section>
@@ -569,7 +609,7 @@
 
 </div>
 
-<script type="module" src="js/app.js?v=13"></script>
+<script type="module" src="js/app.js?v=14"></script>
 
 </body>
 </html>
