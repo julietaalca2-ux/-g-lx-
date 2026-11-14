@@ -1,4 +1,6 @@
+// Punto de entrada principal de ÖG
 import { initSettings, showSettingsSubview } from "./settings.js?v=1";
+import { initProfile, updateSavedPosts, loadProfilePosts } from "./profile.js?v=1";
 
 function initApp() {
 
@@ -9,15 +11,6 @@ function initApp() {
     const navItems = document.querySelectorAll(".nav-item");
     const sections = document.querySelectorAll(".app-section");
     const feedPostsContainer = document.getElementById("feedPosts");
-
-    const profileTabs = document.querySelectorAll(".profile-tab");
-    const profilePanels = document.querySelectorAll(".profile-tab-panel");
-
-    const savedPostsContainer = document.getElementById("savedPosts");
-    const savedEmpty = document.getElementById("savedEmpty");
-
-    const profilePostsContainer = document.getElementById("profilePosts");
-    const profilePublicationsEmpty = document.getElementById("profilePublicationsEmpty");
 
 
     // =====================================
@@ -48,6 +41,11 @@ function initApp() {
 
         if (name === "settings") {
             showSettingsSubview("main");
+        }
+
+        if (name === "profile") {
+            loadProfilePosts();
+            updateSavedPosts();
         }
 
         window.scrollTo({
@@ -91,90 +89,8 @@ function initApp() {
 
 
     // =====================================
-    // PESTAÑAS INTERNAS DEL PERFIL
-    // =====================================
-
-    function showProfileTab(name) {
-
-        const target = document.getElementById("profile-" + name);
-
-        if (!target) {
-            console.error("No existe la pestaña del perfil: " + name);
-            return;
-        }
-
-        profileTabs.forEach(function (tab) {
-
-            const selected = tab.dataset.profileTab === name;
-
-            tab.classList.toggle("active", selected);
-            tab.setAttribute("aria-selected", selected ? "true" : "false");
-
-        });
-
-        profilePanels.forEach(function (panel) {
-            const isTarget = panel === target;
-            panel.classList.toggle("active", isTarget);
-            panel.hidden = !isTarget;
-        });
-    }
-
-
-    profileTabs.forEach(function (button) {
-
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            const name = button.dataset.profileTab;
-
-            if (name) {
-                showProfileTab(name);
-            }
-
-        });
-
-    });
-
-
-    // =====================================
     // ME GUSTA Y GUARDAR PUBLICACIONES
     // =====================================
-
-    function updateSavedPosts() {
-
-        if (!savedPostsContainer || !savedEmpty) return;
-
-        savedPostsContainer.innerHTML = "";
-
-        const savedButtons = document.querySelectorAll(
-            "#feedPosts .save-button.saved"
-        );
-
-        savedButtons.forEach(function (button) {
-
-            const originalPost = button.closest(".post");
-
-            if (!originalPost) return;
-
-            const copy = originalPost.cloneNode(true);
-
-            // Evitar IDs duplicados.
-            copy.removeAttribute("id");
-
-            copy.classList.add("saved-post-copy");
-
-            // Las copias son solo una vista de los guardados.
-            savedPostsContainer.appendChild(copy);
-
-        });
-
-        const hasSavedPosts = savedButtons.length > 0;
-
-        savedEmpty.style.display = hasSavedPosts ? "none" : "flex";
-        savedPostsContainer.style.display = hasSavedPosts ? "flex" : "none";
-    }
-
 
     if (feedPostsContainer) {
 
@@ -213,60 +129,12 @@ function initApp() {
 
 
     // =====================================
-    // PUBLICACIONES PROPIAS DEL PERFIL
-    // =====================================
-
-    function loadProfilePosts() {
-
-        if (!profilePostsContainer) return;
-
-        profilePostsContainer.innerHTML = "";
-
-        const ownPosts = document.querySelectorAll(
-            '#feedPosts .post[data-username="usuario_og"]'
-        );
-
-        ownPosts.forEach(function (post) {
-
-            const image = post.querySelector(".post-image");
-
-            if (!image) return;
-
-            const tile = document.createElement("div");
-
-            tile.className = "profile-post-tile";
-
-            tile.appendChild(image.cloneNode(true));
-
-            profilePostsContainer.appendChild(tile);
-
-        });
-
-        const hasPosts = profilePostsContainer.children.length > 0;
-
-        if (profilePublicationsEmpty) {
-            profilePublicationsEmpty.style.display = hasPosts ? "none" : "flex";
-        }
-
-        const count = document.getElementById("profilePostCount");
-
-        if (count) {
-            count.textContent = ownPosts.length;
-        }
-    }
-
-
-    // =====================================
     // INICIALIZACIÓN
     // =====================================
 
     initSettings();
 
-    loadProfilePosts();
-
-    updateSavedPosts();
-
-    showProfileTab("publications");
+    initProfile();
 
     showSection("home");
 }
