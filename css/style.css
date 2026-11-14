@@ -48,7 +48,9 @@ button {
     flex-direction: column;
 }
 
-/* HEADER */
+/* ================================= */
+/* HEADER                            */
+/* ================================= */
 
 .topbar {
     width: 100%;
@@ -97,13 +99,50 @@ button {
     stroke-linejoin: round;
 }
 
-/* FEED */
+/* ================================= */
+/* CONTENEDOR PRINCIPAL              */
+/* ================================= */
 
 .feed {
     width: 100%;
     flex: 1;
     padding-bottom: calc(80px + env(safe-area-inset-bottom));
 }
+
+/* ================================= */
+/* SISTEMA DE PESTAÑAS               */
+/* ================================= */
+
+.app-section {
+    display: none;
+    width: 100%;
+}
+
+.app-section.active {
+    display: block;
+}
+
+.tab-panel {
+    width: 100%;
+    min-height: 65vh;
+    padding: 22px 18px;
+}
+
+.tab-header {
+    width: 100%;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.tab-header h2 {
+    font-size: 24px;
+    font-weight: 750;
+}
+
+/* ================================= */
+/* HISTORIAS                         */
+/* ================================= */
 
 .stories-section {
     width: 100%;
@@ -157,7 +196,9 @@ button {
     font-weight: 300;
 }
 
-/* POSTS */
+/* ================================= */
+/* PUBLICACIONES                     */
+/* ================================= */
 
 .post {
     width: 100%;
@@ -237,7 +278,9 @@ button {
     color: #fff;
 }
 
-/* POST ACTIONS */
+/* ================================= */
+/* ACCIONES DE PUBLICACIONES         */
+/* ================================= */
 
 .post-actions {
     display: flex;
@@ -291,7 +334,188 @@ button {
     font-size: 11px;
 }
 
-/* BOTTOM NAVIGATION */
+/* ================================= */
+/* CHAT                             */
+/* ================================= */
+
+#chat-section {
+    background: #fff;
+}
+
+.empty-state {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.empty-state h3 {
+    font-size: 19px;
+}
+
+.empty-state p {
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+/* ================================= */
+/* CREAR PUBLICACIÓN                 */
+/* ================================= */
+
+#camera-section {
+    background: #fff;
+}
+
+.create-content {
+    min-height: 48vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.create-icon {
+    width: 75px;
+    height: 75px;
+    border: 2px solid #111;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    font-weight: 300;
+}
+
+.create-content h3 {
+    font-size: 19px;
+}
+
+.create-content p {
+    color: var(--secondary);
+    font-size: 13px;
+}
+
+.primary-button {
+    width: 100%;
+    max-width: 280px;
+    margin-top: 15px;
+    padding: 14px 20px;
+    border-radius: 9px;
+    background: #111;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ================================= */
+/* PERFIL                            */
+/* ================================= */
+
+#profile-section {
+    background: #fff;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+    gap: 7px;
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 8px;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.profile-header h2 {
+    font-size: 20px;
+}
+
+.profile-header p {
+    color: var(--secondary);
+    font-size: 13px;
+}
+
+.profile-stats {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.profile-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.profile-stats strong {
+    font-size: 18px;
+}
+
+.profile-stats span {
+    color: var(--secondary);
+    font-size: 11px;
+}
+
+.profile-description {
+    padding: 18px 5px;
+    font-size: 13px;
+}
+
+/* ================================= */
+/* CONFIGURACIÓN                     */
+/* ================================= */
+
+#settings-section {
+    background: #fff;
+}
+
+.settings-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-option {
+    width: 100%;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    font-size: 14px;
+}
+
+.settings-option span:last-child {
+    color: #999;
+    font-size: 24px;
+}
+
+/* ================================= */
+/* NAVEGACIÓN INFERIOR               */
+/* ================================= */
 
 .bottom-nav {
     position: fixed;
@@ -344,9 +568,12 @@ button {
     stroke-width: 2;
 }
 
-/* TABLETS AND DESKTOP */
+/* ================================= */
+/* TABLETS Y COMPUTADORAS            */
+/* ================================= */
 
 @media (min-width: 700px) {
+
     .topbar {
         padding-left: max(20px, calc((100% - 600px) / 2));
         padding-right: max(20px, calc((100% - 600px) / 2));
