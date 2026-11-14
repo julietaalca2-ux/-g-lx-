@@ -1,6 +1,7 @@
 // Punto de entrada principal de ÖG
 import { initSettings, showSettingsSubview } from "./settings.js?v=1";
 import { initProfile, updateSavedPosts, loadProfilePosts } from "./profile.js?v=1";
+import { initFeed, syncFeedWithProfile } from "./feed.js?v=1";
 
 function initApp() {
 
@@ -10,7 +11,6 @@ function initApp() {
 
     const navItems = document.querySelectorAll(".nav-item");
     const sections = document.querySelectorAll(".app-section");
-    const feedPostsContainer = document.getElementById("feedPosts");
 
 
     // =====================================
@@ -38,6 +38,10 @@ function initApp() {
                 item.dataset.section === name
             );
         });
+
+        if (name === "home") {
+            syncFeedWithProfile();
+        }
 
         if (name === "settings") {
             showSettingsSubview("main");
@@ -89,52 +93,14 @@ function initApp() {
 
 
     // =====================================
-    // ME GUSTA Y GUARDAR PUBLICACIONES
-    // =====================================
-
-    if (feedPostsContainer) {
-
-        feedPostsContainer.addEventListener("click", function (event) {
-
-            const likeButton = event.target.closest(".like-button");
-
-            if (likeButton) {
-                const post = likeButton.closest(".post");
-                if (!post) return;
-
-                const count = post.querySelector(".likes-count");
-                if (!count) return;
-
-                const liked = likeButton.classList.toggle("liked");
-                let current = parseInt(count.textContent, 10) || 0;
-
-                current = liked
-                    ? current + 1
-                    : Math.max(0, current - 1);
-
-                count.textContent = current + " Me gusta";
-                return;
-            }
-
-            const saveButton = event.target.closest(".save-button");
-
-            if (saveButton) {
-                saveButton.classList.toggle("saved");
-                updateSavedPosts();
-            }
-
-        });
-
-    }
-
-
-    // =====================================
     // INICIALIZACIÓN
     // =====================================
 
     initSettings();
 
     initProfile();
+
+    initFeed();
 
     showSection("home");
 }
