@@ -4,52 +4,19 @@
     function initApp() {
 
         // =====================================
-        // ESTADO DE LA APLICACIÓN
+        // ESTADO DE LA APLICACIÓN (SIN DATOS DE PRUEBA)
         // =====================================
 
         const state = {
             currentUser: {
-                username: "usuario_og",
-                bio: "Bienvenido a mi perfil de ÖG."
+                username: "usuario",
+                bio: ""
             },
             selectedPhotoDataUrl: null,
             activeCommentPostId: null,
             activeChatId: null,
-            commentsByPost: {
-                "post-1": [
-                    { user: "sofia", text: "Qué buen comienzo en ÖG." },
-                    { user: "mateo", text: "Me gusta mucho el diseño limpio." }
-                ],
-                "post-2": [
-                    { user: "lucia", text: "Excelente día para compartir." }
-                ]
-            },
-            conversations: [
-                {
-                    id: "chat-sofia",
-                    username: "sofia",
-                    initial: "S",
-                    messages: [
-                        { sender: "them", text: "Hola, ¿ya probaste la nueva versión de ÖG?", time: "10:15" }
-                    ]
-                },
-                {
-                    id: "chat-mateo",
-                    username: "mateo",
-                    initial: "M",
-                    messages: [
-                        { sender: "them", text: "Vi tu última publicación en el inicio.", time: "09:40" }
-                    ]
-                },
-                {
-                    id: "chat-lucia",
-                    username: "lucia",
-                    initial: "L",
-                    messages: [
-                        { sender: "them", text: "Avísame cuando subas nuevas fotos.", time: "Ayer" }
-                    ]
-                }
-            ]
+            commentsByPost: {},
+            conversations: []
         };
 
 
@@ -60,6 +27,7 @@
         const navItems = document.querySelectorAll(".nav-item");
         const sections = document.querySelectorAll(".app-section");
         const feedPostsContainer = document.getElementById("feedPosts");
+        const feedEmpty = document.getElementById("feedEmpty");
 
         const profileTabs = document.querySelectorAll(".profile-tab");
         const profilePanels = document.querySelectorAll(".profile-tab-panel");
@@ -71,6 +39,7 @@
         const chatListView = document.getElementById("chatListView");
         const chatThreadView = document.getElementById("chatThreadView");
         const chatListContainer = document.getElementById("chatList");
+        const chatEmptyState = document.getElementById("chatEmptyState");
         const chatBackBtn = document.getElementById("chatBackBtn");
         const chatThreadAvatar = document.getElementById("chatThreadAvatar");
         const chatThreadName = document.getElementById("chatThreadName");
@@ -132,6 +101,12 @@
             return div.innerHTML;
         }
 
+        function updateFeedEmptyState() {
+            if (!feedPostsContainer || !feedEmpty) return;
+            const hasPosts = feedPostsContainer.children.length > 0;
+            feedEmpty.hidden = hasPosts;
+        }
+
 
         // =====================================
         // NAVEGACIÓN PRINCIPAL (5 SECCIONES)
@@ -157,6 +132,10 @@
                     item.dataset.section === name
                 );
             });
+
+            if (name === "home") {
+                updateFeedEmptyState();
+            }
 
             if (name === "chat") {
                 closeChatThread();
@@ -210,21 +189,21 @@
         // 1. INICIO: HISTORIAS Y ACCIONES DE POSTS
         // =====================================
 
-        document.querySelectorAll(".story").forEach(function (storyBtn) {
-            storyBtn.addEventListener("click", function () {
-                const user = storyBtn.dataset.storyUser || "Historia";
-                const text = storyBtn.dataset.storyText || "";
-                openSheet(user, "<p>" + escapeHTML(text) + "</p>", false);
+        const ownStoryBtn = document.getElementById("ownStoryBtn");
+        if (ownStoryBtn) {
+            ownStoryBtn.addEventListener("click", function () {
+                showSection("camera");
             });
-        });
+        }
 
         const notificationsBtn = document.getElementById("notificationsBtn");
         if (notificationsBtn) {
             notificationsBtn.addEventListener("click", function () {
-                const html =
-                    '<div class="sheet-comment-item"><strong>sofia</strong> indicó Me gusta en tu publicación.</div>' +
-                    '<div class="sheet-comment-item"><strong>mateo</strong> comentó: "Me gusta mucho el diseño limpio."</div>';
-                openSheet("Actividad reciente", html, false);
+                openSheet(
+                    "Actividad",
+                    '<p style="color:#888;">No tienes notificaciones por el momento.</p>',
+                    false
+                );
             });
         }
 
@@ -247,7 +226,7 @@
             let html = "";
 
             if (list.length === 0) {
-                html = '<p style="color:#888;">Todavía no hay comentarios. Sé el primero en comentar.</p>';
+                html = '<p style="color:#888;">Todavía no hay comentarios.</p>';
             } else {
                 html = list.map(function (c) {
                     return '<div class="sheet-comment-item"><strong>' +
@@ -261,7 +240,7 @@
             openSheet("Comentarios", html, true);
         }
 
-        // Delegación de eventos en el Feed (funciona en posts iniciales y recién creados)
+        // Delegación de eventos en el Feed
         if (feedPostsContainer) {
             feedPostsContainer.addEventListener("click", function (event) {
                 const post = event.target.closest(".post");
@@ -303,7 +282,7 @@
                     const author = post.dataset.username || "usuario";
                     const captionEl = post.querySelector(".post-caption-text");
                     const caption = captionEl ? captionEl.textContent : "";
-                    const shareText = "Publicación de " + author + " en ÖG: " + caption;
+                    const shareText = "Publicación de " + author + " en ÖG" + (caption ? ": " + caption : "");
 
                     if (navigator.share) {
                         navigator.share({
@@ -313,7 +292,7 @@
                         }).catch(function () {});
                     } else if (navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(shareText).then(function () {
-                            showToast("Texto de publicación copiado");
+                            showToast("Enlace de publicación copiado");
                         }).catch(function () {
                             showToast("Listo para compartir");
                         });
@@ -331,7 +310,7 @@
                     if (isOwn) {
                         html += '<button type="button" class="settings-option" id="modalDeletePostBtn" style="color:#d93025;"><span>Eliminar publicación</span><span>›</span></button>';
                     }
-                    openSheet("Opciones de publicación", html, false);
+                    openSheet("Opciones", html, false);
 
                     const copyBtn = document.getElementById("modalCopyPostBtn");
                     if (copyBtn) {
@@ -348,7 +327,9 @@
                     const deleteBtn = document.getElementById("modalDeletePostBtn");
                     if (deleteBtn) {
                         deleteBtn.addEventListener("click", function () {
+                            delete state.commentsByPost[postId];
                             post.remove();
+                            updateFeedEmptyState();
                             loadProfilePosts();
                             updateSavedPosts();
                             closeSheet();
@@ -427,11 +408,18 @@
             if (!chatListContainer) return;
             chatListContainer.innerHTML = "";
 
+            const hasConversations = state.conversations.length > 0;
+            if (chatEmptyState) {
+                chatEmptyState.hidden = hasConversations;
+            }
+
+            if (!hasConversations) return;
+
             state.conversations.forEach(function (conv) {
                 const lastMsg = conv.messages[conv.messages.length - 1];
                 const previewText = lastMsg
                     ? (lastMsg.sender === "me" ? "Tú: " + lastMsg.text : lastMsg.text)
-                    : "Sin mensajes";
+                    : "";
                 const timeText = lastMsg ? lastMsg.time : "";
 
                 const item = document.createElement("button");
@@ -590,6 +578,10 @@
             article.dataset.postId = newId;
             article.dataset.username = username;
 
+            const captionHTML = caption
+                ? '<p><strong class="post-caption-user">' + escapeHTML(username) + '</strong> <span class="post-caption-text">' + escapeHTML(caption) + "</span></p>"
+                : "";
+
             article.innerHTML =
                 '<div class="post-header">' +
                     '<div class="user-avatar">' + escapeHTML(initial) + "</div>" +
@@ -620,7 +612,7 @@
                 "</div>" +
                 '<div class="post-description">' +
                     '<strong class="likes-count">0 Me gusta</strong>' +
-                    '<p><strong class="post-caption-user">' + escapeHTML(username) + '</strong> <span class="post-caption-text">' + escapeHTML(caption) + "</span></p>" +
+                    captionHTML +
                     '<button class="view-comments-btn" type="button">Agregar un comentario</button>' +
                 "</div>";
 
@@ -636,13 +628,14 @@
                     return;
                 }
 
-                const caption = postCaptionInput.value.trim() || "Nueva publicación en ÖG.";
+                const caption = postCaptionInput.value.trim();
                 const newPost = createPostElement(state.selectedPhotoDataUrl, caption);
 
                 if (feedPostsContainer) {
                     feedPostsContainer.prepend(newPost);
                 }
 
+                updateFeedEmptyState();
                 loadProfilePosts();
                 resetCreateForm();
                 showSection("home");
@@ -806,7 +799,6 @@
                 state.currentUser.username = newUsername;
                 state.currentUser.bio = newBio;
 
-                // Actualizar publicaciones propias existentes en el Feed
                 document.querySelectorAll('#feedPosts .post[data-username="' + oldUsername + '"]').forEach(function (post) {
                     post.dataset.username = newUsername;
                     const authorEl = post.querySelector(".post-author-name");
@@ -843,6 +835,7 @@
         // INICIALIZACIÓN
         // =====================================
 
+        updateFeedEmptyState();
         renderChatList();
         syncProfileIdentityUI();
         loadProfilePosts();
