@@ -48,9 +48,7 @@ button {
     flex-direction: column;
 }
 
-/* ================================= */
-/* HEADER                            */
-/* ================================= */
+/* HEADER */
 
 .topbar {
     width: 100%;
@@ -99,9 +97,7 @@ button {
     stroke-linejoin: round;
 }
 
-/* ================================= */
-/* CONTENEDOR PRINCIPAL              */
-/* ================================= */
+/* CONTENEDOR PRINCIPAL */
 
 .feed {
     width: 100%;
@@ -109,9 +105,7 @@ button {
     padding-bottom: calc(80px + env(safe-area-inset-bottom));
 }
 
-/* ================================= */
-/* SISTEMA DE PESTAÑAS               */
-/* ================================= */
+/* NAVEGACIÓN ENTRE PANTALLAS */
 
 .app-section {
     display: none;
@@ -140,9 +134,7 @@ button {
     font-weight: 750;
 }
 
-/* ================================= */
-/* HISTORIAS                         */
-/* ================================= */
+/* HISTORIAS */
 
 .stories-section {
     width: 100%;
@@ -196,9 +188,7 @@ button {
     font-weight: 300;
 }
 
-/* ================================= */
-/* PUBLICACIONES                     */
-/* ================================= */
+/* PUBLICACIONES DEL FEED */
 
 .post {
     width: 100%;
@@ -278,9 +268,7 @@ button {
     color: #fff;
 }
 
-/* ================================= */
-/* ACCIONES DE PUBLICACIONES         */
-/* ================================= */
+/* ACCIONES DE PUBLICACIONES */
 
 .post-actions {
     display: flex;
@@ -334,9 +322,7 @@ button {
     font-size: 11px;
 }
 
-/* ================================= */
-/* CHAT                             */
-/* ================================= */
+/* CHAT */
 
 #chat-section {
     background: #fff;
@@ -361,9 +347,7 @@ button {
     font-size: 14px;
 }
 
-/* ================================= */
-/* CREAR PUBLICACIÓN                 */
-/* ================================= */
+/* CREAR PUBLICACIÓN */
 
 #camera-section {
     background: #fff;
@@ -412,9 +396,7 @@ button {
     font-weight: 600;
 }
 
-/* ================================= */
-/* PERFIL                            */
-/* ================================= */
+/* PERFIL */
 
 #profile-section {
     background: #fff;
@@ -482,9 +464,154 @@ button {
     font-size: 13px;
 }
 
-/* ================================= */
-/* CONFIGURACIÓN                     */
-/* ================================= */
+/* PESTAÑAS INTERNAS DEL PERFIL */
+
+.profile-tabs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 5px;
+}
+
+.profile-tab {
+    min-width: 0;
+    min-height: 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #999;
+    position: relative;
+}
+
+.profile-tab svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.profile-tab span {
+    font-size: 10px;
+}
+
+.profile-tab.active {
+    color: #111;
+}
+
+.profile-tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 18%;
+    width: 64%;
+    height: 2px;
+    background: #111;
+}
+
+/* PANELES INTERNOS */
+
+.profile-tab-panel {
+    display: none;
+    width: 100%;
+    min-height: 220px;
+}
+
+.profile-tab-panel.active {
+    display: block;
+}
+
+/* CUADRÍCULA DE PUBLICACIONES DEL PERFIL */
+
+.profile-post-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+}
+
+.profile-post-tile {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--soft);
+}
+
+.profile-post-tile .post-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+}
+
+.profile-post-tile .post-image span {
+    font-size: 30px;
+    letter-spacing: -2px;
+}
+
+/* ESTADOS VACÍOS DEL PERFIL */
+
+.profile-empty {
+    width: 100%;
+    min-height: 220px;
+    padding: 35px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 9px;
+}
+
+.profile-empty h3 {
+    font-size: 16px;
+}
+
+.profile-empty p {
+    max-width: 250px;
+    color: var(--secondary);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.profile-empty-icon {
+    width: 55px;
+    height: 55px;
+    border: 1.5px solid #222;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+/* GUARDADOS */
+
+.saved-posts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+
+.saved-post-copy {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.saved-post-copy .post-actions {
+    display: none;
+}
+
+/* CONFIGURACIÓN */
 
 #settings-section {
     background: #fff;
@@ -513,9 +640,7 @@ button {
     font-size: 24px;
 }
 
-/* ================================= */
-/* NAVEGACIÓN INFERIOR               */
-/* ================================= */
+/* NAVEGACIÓN INFERIOR */
 
 .bottom-nav {
     position: fixed;
@@ -568,9 +693,7 @@ button {
     stroke-width: 2;
 }
 
-/* ================================= */
-/* TABLETS Y COMPUTADORAS            */
-/* ================================= */
+/* TABLETS Y COMPUTADORAS */
 
 @media (min-width: 700px) {
 
