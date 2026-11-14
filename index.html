@@ -8,8 +8,9 @@
 
     <title>ÖG</title>
 
-    <link rel="stylesheet" href="css/style.css?v=10">
+    <link rel="stylesheet" href="css/style.css?v=11">
     <link rel="stylesheet" href="css/feed.css?v=1">
+    <link rel="stylesheet" href="css/chat.css?v=1">
     <link rel="stylesheet" href="css/profile.css?v=1">
     <link rel="stylesheet" href="css/settings.css?v=1">
 </head>
@@ -64,13 +65,55 @@
         <!-- CHAT -->
         <section class="app-section tab-panel" id="chat-section" hidden>
 
-            <div class="tab-header">
-                <h2>Chat</h2>
+            <!-- LISTA DE CONVERSACIONES -->
+            <div class="chat-view" id="chatListView">
+
+                <div class="tab-header">
+                    <h2>Chat</h2>
+                </div>
+
+                <div class="chat-list" id="chatList" hidden></div>
+
+                <div class="chat-empty" id="chatEmpty">
+                    <h3>Tus mensajes</h3>
+                    <p>Aquí aparecerán tus conversaciones.</p>
+                </div>
+
             </div>
 
-            <div class="empty-state">
-                <h3>Tus mensajes</h3>
-                <p>Aquí aparecerán tus conversaciones.</p>
+            <!-- PANTALLA INDIVIDUAL DE CONVERSACIÓN -->
+            <div class="chat-room" id="chatRoomView" hidden>
+
+                <div class="chat-room-header">
+                    <button class="chat-back-button" id="chatBackButton" type="button" aria-label="Volver a mensajes">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+
+                    <div class="chat-room-avatar" id="chatRoomAvatar">Ö</div>
+
+                    <div class="chat-room-user">
+                        <strong id="chatRoomName">Usuario</strong>
+                        <span id="chatRoomHandle"></span>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages"></div>
+
+                <form class="chat-input-bar" id="chatForm" autocomplete="off">
+                    <input
+                        class="chat-input"
+                        id="chatInput"
+                        type="text"
+                        maxlength="500"
+                        placeholder="Escribí un mensaje..."
+                        aria-label="Escribí un mensaje">
+                    <button class="chat-send-button" id="chatSendButton" type="submit" disabled>
+                        Enviar
+                    </button>
+                </form>
+
             </div>
 
         </section>
@@ -526,7 +569,7 @@
 
 </div>
 
-<script type="module" src="js/app.js?v=12"></script>
+<script type="module" src="js/app.js?v=13"></script>
 
 </body>
 </html>
