@@ -1,11 +1,12 @@
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
     // =====================================
     // ME GUSTA
     // =====================================
-    document.querySelectorAll(".like-button").forEach(button => {
-        button.addEventListener("click", () => {
+
+    document.querySelectorAll(".like-button").forEach(function (button) {
+        button.addEventListener("click", function () {
             const post = button.closest(".post");
             if (!post) return;
 
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             current = liked ? current + 1 : Math.max(0, current - 1);
 
-            count.textContent = `${current} Me gusta`;
+            count.textContent = current + " Me gusta";
         });
     });
 
@@ -25,62 +26,67 @@ document.addEventListener("DOMContentLoaded", () => {
     // =====================================
     // GUARDAR PUBLICACIONES
     // =====================================
-    document.querySelectorAll(".save-button").forEach(button => {
-        button.addEventListener("click", () => {
+
+    document.querySelectorAll(".save-button").forEach(function (button) {
+        button.addEventListener("click", function () {
             button.classList.toggle("saved");
         });
     });
 
 
     // =====================================
-    // NAVEGACIÓN ENTRE SECCIONES
+    // NAVEGACIÓN
     // =====================================
+
     const navItems = document.querySelectorAll(".nav-item");
     const sections = document.querySelectorAll(".app-section");
 
-    function showSection(sectionName) {
-        const targetSection = document.getElementById(
-            `${sectionName}-section`
-        );
+    function showSection(name) {
 
-        // Si la sección no existe, no hacemos el cambio
-        if (!targetSection) {
-            console.warn("No se encontró la sección:", sectionName);
+        const target = document.getElementById(name + "-section");
+
+        if (!target) {
+            console.error("No existe la sección: " + name);
             return;
         }
 
-        // Ocultar todas las secciones
-        sections.forEach(section => {
+        // Ocultar todas las pantallas directamente
+        sections.forEach(function (section) {
             section.classList.remove("active");
+            section.style.setProperty("display", "none", "important");
         });
 
-        // Mostrar la sección seleccionada
-        targetSection.classList.add("active");
+        // Mostrar solamente la pantalla seleccionada
+        target.classList.add("active");
+        target.style.setProperty("display", "block", "important");
 
-        // Actualizar el botón seleccionado
-        navItems.forEach(item => {
+        // Actualizar los botones inferiores
+        navItems.forEach(function (item) {
             item.classList.toggle(
                 "active",
-                item.dataset.section === sectionName
+                item.dataset.section === name
             );
         });
 
-        // Volver arriba al cambiar de pantalla
         window.scrollTo(0, 0);
     }
 
-    // Activar navegación
-    navItems.forEach(button => {
-        button.addEventListener("click", () => {
-            const sectionName = button.dataset.section;
 
-            if (sectionName) {
-                showSection(sectionName);
+    // Conectar los botones
+    navItems.forEach(function (button) {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const name = button.getAttribute("data-section");
+
+            if (name) {
+                showSection(name);
             }
         });
     });
 
-    // Mostrar Inicio al abrir la aplicación
+
+    // Abrir Inicio al cargar
     showSection("home");
 
 });
