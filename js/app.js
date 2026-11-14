@@ -105,7 +105,7 @@ function initApp() {
 
 
     // =====================================
-    // INICIALIZACIÓN SEGURA
+    // INICIALIZACIÓN SEGURA DE MÓDULOS
     // =====================================
 
     try { initSettings(); } catch (e) { console.error("Error en settings:", e); }
